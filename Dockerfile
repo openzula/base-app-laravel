@@ -38,8 +38,7 @@ ONBUILD RUN mkdir -p storage/framework/sessions
 ONBUILD RUN mkdir -p storage/framework/views
 ONBUILD RUN mkdir -p storage/logs
 
-ONBUILD RUN chown -R www-data:www-data bootstrap/cache storage
-ONBUILD RUN composer install -n -o --prefer-dist --no-dev
+ONBUILD RUN COMPOSER_ALLOW_SUPERUSER=1 composer install -n -o --prefer-dist --no-dev
 
 ## We don't need Git now that composer has installed everything
 ONBUILD RUN apt-get purge -y git && apt-get autoremove -y

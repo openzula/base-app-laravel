@@ -6,6 +6,8 @@ if ! /usr/bin/composer run-script oz-pre-start; then
     exit 1
 fi
 
+chown -R www-data:www-data bootstrap/cache storage
+
 echo "oz-start-laravel: Starting 'cron' service... "
 if ! service cron start; then
     echo "oz-start-laravel: Failed to start cron service" >&2

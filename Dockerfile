@@ -18,7 +18,7 @@ COPY ./config/php.ini /usr/local/etc/php/
 
 ## Composer
 RUN apt-get install -y git
-COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 
 ## Cronjob (Laravel Schedule)
 RUN apt-get install -y cron

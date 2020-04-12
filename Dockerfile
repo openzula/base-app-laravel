@@ -17,7 +17,7 @@ RUN docker-php-ext-install pdo_mysql tidy zip gd exif
 COPY ./config/php.ini /usr/local/etc/php/
 
 ## Composer
-RUN apt-get install -y git
+RUN apt-get install -y git unzip
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 
 ## Cronjob (Laravel Schedule)

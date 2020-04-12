@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "oz-start-laravel: Running 'oz-pre-start' Composer script... "
+if ! /usr/bin/composer run-script oz-pre-start; then
+    echo "oz-start-laravel: Failed to complete 'oz-pre-start'"
+    exit 1
+fi
+
+echo "oz-start-laravel: Starting 'cron' service... "
+if ! service cron start; then
+    echo "oz-start-laravel: Failed to start cron service" >&2
+    exit 1
+fi
+
+echo "oz-start-laravel: Starting php-fpm (foreground)... "
+php-fpm

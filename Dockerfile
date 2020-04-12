@@ -36,6 +36,7 @@ ONBUILD RUN mkdir -p storage/app/public
 ONBUILD RUN mkdir -p storage/framework/cache
 ONBUILD RUN mkdir -p storage/framework/sessions
 ONBUILD RUN mkdir -p storage/framework/views
+ONBUILD RUN mkdir -p storage/logs
 
 ONBUILD RUN chown -R www-data:www-data bootstrap/cache storage
 ONBUILD RUN composer install -n -o --prefer-dist --no-dev

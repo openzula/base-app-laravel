@@ -6,6 +6,16 @@ WORKDIR /var/www
 
 RUN apt-get update
 
+## Healthcheck
+RUN apt-get install -y libfcgi-bin
+
+RUN echo 'pm.status_path = /oz-health-status' >> /usr/local/etc/php-fpm.d/zz-docker.conf
+RUN echo 'ping.path = /oz-health-ping' >> /usr/local/etc/php-fpm.d/zz-docker.conf
+
+COPY ./bin/oz-healthcheck /usr/local/bin/oz-healthcheck
+HEALTHCHECK --interval=10s --timeout=10s CMD /usr/local/bin/oz-healthcheck
+
+## General
 COPY ./bin/oz-start-laravel /usr/local/bin/oz-start-laravel
 RUN chmod u+x /usr/local/bin/oz-start-laravel
 
